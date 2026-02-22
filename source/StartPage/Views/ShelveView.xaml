@@ -475,6 +475,7 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
                                 </Grid>
+                                <CheckBox Content="Include games with no genre" IsChecked="{Binding ShelveProperties.IncludeNoGenres}" Margin="2"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
@@ -492,6 +493,7 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
                                 </Grid>
+                                <CheckBox Content="Include games with no category" IsChecked="{Binding ShelveProperties.IncludeUncategorized}" Margin="2"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
@@ -509,6 +511,7 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
                                 </Grid>
+                                <CheckBox Content="Include games with no tag" IsChecked="{Binding ShelveProperties.IncludeUntagged}" Margin="2"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>
@@ -526,6 +529,7 @@
                                         </ComboBox.ItemTemplate>
                                     </ComboBox>
                                 </Grid>
+                                <CheckBox Content="Include games with no feature" IsChecked="{Binding ShelveProperties.IncludeNoFeatures}" Margin="2"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition SharedSizeGroup="FilterLabelWidht"/>

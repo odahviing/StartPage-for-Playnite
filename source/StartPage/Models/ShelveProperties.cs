@@ -106,14 +106,23 @@ namespace LandingPage.Models
         private HashSet<Guid> categories = new HashSet<Guid>();
         public HashSet<Guid> Categories { get => categories; set => SetValue(ref categories, value); }
 
+        private bool includeUncategorized = false;
+        public bool IncludeUncategorized { get => includeUncategorized; set => SetValue(ref includeUncategorized, value); }
+
         private HashSet<Guid> tags = new HashSet<Guid>();
         public HashSet<Guid> Tags { get => tags; set => SetValue(ref tags, value); }
+
+        private bool includeUntagged = false;
+        public bool IncludeUntagged { get => includeUntagged; set => SetValue(ref includeUntagged, value); }
 
         private HashSet<Guid> completionStatus = new HashSet<Guid>();
         public HashSet<Guid> CompletionStatus { get => completionStatus; set => SetValue(ref completionStatus, value); }
 
         private HashSet<Guid> features = new HashSet<Guid>();
         public HashSet<Guid> Features { get => features; set => SetValue(ref features, value); }
+
+        private bool includeNoFeatures = false;
+        public bool IncludeNoFeatures { get => includeNoFeatures; set => SetValue(ref includeNoFeatures, value); }
 
         private HashSet<Guid> platforms = new HashSet<Guid>();
         public HashSet<Guid> Platforms { get => platforms; set => SetValue(ref platforms, value); }
@@ -123,5 +132,8 @@ namespace LandingPage.Models
 
         private HashSet<Guid> genres = new HashSet<Guid>();
         public HashSet<Guid> Genres { get => genres; set => SetValue(ref genres, value); }
+
+        private bool includeNoGenres = false;
+        public bool IncludeNoGenres { get => includeNoGenres; set => SetValue(ref includeNoGenres, value); }
     }
 }
