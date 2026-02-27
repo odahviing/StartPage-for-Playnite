@@ -589,29 +589,38 @@ namespace LandingPage.ViewModels
                                     .Where(g => g.Favorite || !shelveProperties.FavoritesOnly)
                                     .Where(g => !g.Hidden || !shelveProperties.IgnoreHidden)
                                     .Where(g => g.IsInstalled || !shelveProperties.InstalledOnly);
+            // Snapshot collections to prevent concurrent modification exceptions
+            var categories = shelveProperties.Categories?.ToHashSet();
+            var genres = shelveProperties.Genres?.ToHashSet();
+            var tags = shelveProperties.Tags?.ToHashSet();
+            var completionStatus = shelveProperties.CompletionStatus?.ToHashSet();
+            var features = shelveProperties.Features?.ToHashSet();
+            var sources = shelveProperties.Sources?.ToHashSet();
+            var platforms = shelveProperties.Platforms?.ToHashSet();
+
             // apply filters
-            if (shelveProperties.Categories?.Any() ?? false)
+            if (categories?.Any() ?? false)
                 games = games.Where(g =>
-                    (shelveProperties.Categories.Contains(NoneGuid) && (g.CategoryIds == null || g.CategoryIds.Count == 0))
-                    || (g.CategoryIds?.Any(id => shelveProperties.Categories.Contains(id)) ?? false));
-            if (shelveProperties.Genres?.Any() ?? false)
+                    (categories.Contains(NoneGuid) && (g.CategoryIds == null || g.CategoryIds.Count == 0))
+                    || (g.CategoryIds?.Any(id => categories.Contains(id)) ?? false));
+            if (genres?.Any() ?? false)
                 games = games.Where(g =>
-                    (shelveProperties.Genres.Contains(NoneGuid) && (g.GenreIds == null || g.GenreIds.Count == 0))
-                    || (g.GenreIds?.Any(id => shelveProperties.Genres.Contains(id)) ?? false));
-            if (shelveProperties.Tags?.Any() ?? false)
+                    (genres.Contains(NoneGuid) && (g.GenreIds == null || g.GenreIds.Count == 0))
+                    || (g.GenreIds?.Any(id => genres.Contains(id)) ?? false));
+            if (tags?.Any() ?? false)
                 games = games.Where(g =>
-                    (shelveProperties.Tags.Contains(NoneGuid) && (g.TagIds == null || g.TagIds.Count == 0))
-                    || (g.TagIds?.Any(id => shelveProperties.Tags.Contains(id)) ?? false));
-            if (shelveProperties.CompletionStatus?.Any() ?? false)
-                games = games.Where(g => shelveProperties.CompletionStatus.Contains(g.CompletionStatusId));
-            if (shelveProperties.Features?.Any() ?? false)
+                    (tags.Contains(NoneGuid) && (g.TagIds == null || g.TagIds.Count == 0))
+                    || (g.TagIds?.Any(id => tags.Contains(id)) ?? false));
+            if (completionStatus?.Any() ?? false)
+                games = games.Where(g => completionStatus.Contains(g.CompletionStatusId));
+            if (features?.Any() ?? false)
                 games = games.Where(g =>
-                    (shelveProperties.Features.Contains(NoneGuid) && (g.FeatureIds == null || g.FeatureIds.Count == 0))
-                    || (g.FeatureIds?.Any(id => shelveProperties.Features.Contains(id)) ?? false));
-            if (shelveProperties.Sources?.Any() ?? false)
-                games = games.Where(g => shelveProperties.Sources.Contains(g.SourceId));
-            if (shelveProperties.Platforms?.Any() ?? false)
-                games = games.Where(g => g.PlatformIds?.Any(id => shelveProperties.Platforms.Contains(id)) ?? false);
+                    (features.Contains(NoneGuid) && (g.FeatureIds == null || g.FeatureIds.Count == 0))
+                    || (g.FeatureIds?.Any(id => features.Contains(id)) ?? false));
+            if (sources?.Any() ?? false)
+                games = games.Where(g => sources.Contains(g.SourceId));
+            if (platforms?.Any() ?? false)
+                games = games.Where(g => g.PlatformIds?.Any(id => platforms.Contains(id)) ?? false);
 
             if (ShelveSettings.SkipGamesInPreviousShelves)
             {
